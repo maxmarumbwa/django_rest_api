@@ -1,8 +1,8 @@
 from django.urls import path, include
-from app.api.views import movie_list, movie_detail
+from app.api.views import MovieListAV, MovieDetailAV
 
 urlpatterns = [
-    path("list/", movie_list, name="movie_list"),
-    path("<int:movie_id>/", movie_detail, name="movie_detail"),
+    path("list/", MovieListAV.as_view(), name="Movie-list"),
+    path("<int:pk>/", MovieDetailAV.as_view(), name="Movie-Detail"),
     # You can add more paths here if needed
 ]
