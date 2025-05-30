@@ -1,23 +1,28 @@
 from rest_framework import serializers
-from app.models import Movie
+from app.models import WatchList, StreamPlatform
 
 
-class MovieSerializer(serializers.ModelSerializer):
-    len_name = serializers.SerializerMethodField()
-
+class StreamPlatformSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Movie
+        model = StreamPlatform
+        fields = "__all__"
+
+
+class WatchListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WatchList
         fields = "__all__"
         # fields = ["id", "name", "description"]
         # exclude = ["id"]  # if you want to exclude the id field
 
-    def get_len_name(self, obj):
-        return len(obj.name)
 
-    def validate(self, data):
-        if data["name"] == data["description"]:
-            raise serializers.ValidationError("Name and description cannot be the same")
-        return data
+# def get_len_name(self, obj):
+#     return len(obj.title)
+
+# def validate(self, data):
+#     if data["title"] == data["storyline"]:
+#         raise serializers.ValidationError("Title and storyline cannot be the same")
+#     return data
 
 
 # def name_length(value):
