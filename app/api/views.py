@@ -61,7 +61,7 @@ class StreamPlatformDetailAV(APIView):
         return Response(serializer.data)
 
 
-class WatchList(generics.ListAPIView):
+class WatchListGV(generics.ListAPIView):
     queryset = WatchList.objects.all()
     serializer_class = WatchListSerializer
     filter_backends = [filters.SearchFilter]
