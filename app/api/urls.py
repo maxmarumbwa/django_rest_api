@@ -21,5 +21,10 @@ urlpatterns = [
         UserReview.as_view(),
         name="user-review-detail",
     ),
+    path(
+        "reviews/",
+        UserReview.as_view(),
+        name="user-review-detail",
+    ),
     # You can add more paths here if needed
 ]
