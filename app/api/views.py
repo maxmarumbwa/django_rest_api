@@ -13,9 +13,11 @@ from app.api.serializers import (
 # from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import filters
 from app.api.permissions import AdminOrReadOnly
 from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 from django.contrib.auth.models import User
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class UserReview(generics.ListAPIView):
@@ -57,6 +59,13 @@ class StreamPlatformDetailAV(APIView):
             )
         serializer = StreamPlatformSerializer(stream_platform)
         return Response(serializer.data)
+
+
+class WatchList(generics.ListAPIView):
+    queryset = WatchList.objects.all()
+    serializer_class = WatchListSerializer
+    filter_backends = [filters.SearchFilter]
+    filterset_fields = ["=title", "platform__name"]
 
 
 class WatchListAV(APIView):
