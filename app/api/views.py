@@ -7,6 +7,7 @@ from app.api.serializers import WatchListSerializer, StreamPlatformSerializer
 # from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from app.api.permissions import AdminOrReadOnly
 
 
 class StreamPlatformAV(APIView):
