@@ -4,6 +4,7 @@ from app.api.views import (
     StreamPlatformAV,
     WatchDetailAV,
     StreamPlatformDetailAV,
+    UserReview,
 )
 
 urlpatterns = [
@@ -14,6 +15,11 @@ urlpatterns = [
         "stream/<int:pk>/",
         StreamPlatformDetailAV.as_view(),
         name="stream-platform-detail",
+    ),
+    path(
+        "reviews/<str:username>/",
+        UserReview.as_view(),
+        name="user-review-detail",
     ),
     # You can add more paths here if needed
 ]

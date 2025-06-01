@@ -1,13 +1,29 @@
 # ####------CLASS BASED VIEWS------####
 # import modules
 from rest_framework.views import APIView
-from app.models import WatchList, StreamPlatform
-from app.api.serializers import WatchListSerializer, StreamPlatformSerializer
+from app.models import WatchList, StreamPlatform, Review
+from rest_framework import generics
+
+from app.api.serializers import (
+    WatchListSerializer,
+    StreamPlatformSerializer,
+    ReviewSerializer,
+)
 
 # from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from app.api.permissions import AdminOrReadOnly
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
+from django.contrib.auth.models import User
+
+
+class UserReview(generics.ListAPIView):
+    serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        username = self.kwargs["username"]
+        return Review.objects.filter(review_user__username=username)
 
 
 class StreamPlatformAV(APIView):
@@ -43,6 +59,7 @@ class WatchListAV(APIView):
     def get(self, request):
         watchlist = WatchList.objects.all()
         serializer = WatchListSerializer(watchlist, many=True)
+        throttle_classes = [UserRateThrottle, AnonRateThrottle]
         return Response(serializer.data)
 
     def post(self, request):
