@@ -140,6 +140,6 @@ REST_FRAMEWORK = {
         "anon": "100/day",
         "user": "2100/day",
     },
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 5,
+    # "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    # "PAGE_SIZE": 5,
 }

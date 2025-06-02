@@ -18,6 +18,7 @@ from app.api.permissions import AdminOrReadOnly
 from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
+from app.api.pagination import WatchListPagination
 
 
 class UserReview(generics.ListAPIView):
@@ -64,6 +65,7 @@ class StreamPlatformDetailAV(APIView):
 class WatchListGV(generics.ListAPIView):
     queryset = WatchList.objects.all()
     serializer_class = WatchListSerializer
+    pagination_class = WatchListPagination
     filter_backends = [filters.SearchFilter]
     filterset_fields = ["=title", "platform__name"]
 
